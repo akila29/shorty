@@ -1,1 +1,9 @@
 URL Shortener — Design Summary.md
+.env
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+.uv/

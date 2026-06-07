@@ -10,10 +10,17 @@ python main.py
 
 # Install dependencies (using uv, preferred; or pip)
 uv sync
-# or: pip install -e .
 
 # Add a dependency
 uv add <package>
+```
+
+**Migrations (Alembic)** — run before starting the app on a fresh DB:
+```bash
+alembic upgrade head       # apply all pending migrations
+alembic downgrade -1       # roll back one migration
+alembic revision -m "desc" # create a new migration
+alembic history            # show applied migrations
 ```
 
 Python version is pinned to **3.11** (`.python-version`).
@@ -36,4 +43,4 @@ This is a high-throughput URL shortener. The full design is in `URL Shortener �
 
 ## Project status
 
-The implementation is at skeleton stage (`main.py` is a placeholder). The storage layer (Postgres + Redis), ID generator, base62 encoder, and HTTP API have not been built yet.
+Section 1 (core service) is complete: FastAPI app with `POST /shorten` and `GET /{short_code}`, base62 ID encoding, asyncpg connection pool, Redis cache-aside, and Alembic migrations. Schema is managed by Alembic — run `alembic upgrade head` before starting the app on a fresh database.
